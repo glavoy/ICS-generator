@@ -148,38 +148,48 @@ def get_user_input():
 
     # Alarm/reminder options
     print("\nReminder options:")
-    print("1. 5 minutes before")
-    print("2. 10 minutes before")
-    print("3. 1 hour before")
-    print("4. 2 hours before")
-    print("5. 12 hours before")
-    print("6. 1 day before")
-    print("7. No reminder")
-    
+    print("1. At time of event")
+    print("2. 5 minutes before")
+    print("3. 10 minutes before")
+    print("4. 15 minutes before")
+    print("5. 30 minutes before")
+    print("6. 1 hour before")
+    print("7. 2 hours before")
+    print("8. 12 hours before")
+    print("9. 1 day before")
+    print("10. 2 days before")
+    print("11. 1 week before")
+    print("12. No reminder")
+
     while True:
-        choice = input("Select reminder option [default: 1 - 5 minutes]: ").strip()
+        choice = input("Select reminder option [default: 1 - At time of event]: ").strip()
         if not choice:
             choice = "1"
-        
-        if choice in ["1", "2", "3", "4", "5", "6", "7"]:
+
+        if choice in [str(i) for i in range(1, 13)]:
             reminder_options = {
-                "1": ("5 minutes", "-PT5M"),
-                "2": ("10 minutes", "-PT10M"),
-                "3": ("1 hour", "-PT1H"),
-                "4": ("2 hours", "-PT2H"),
-                "5": ("12 hours", "-PT12H"),
-                "6": ("1 day", "-P1D"),
-                "7": ("No reminder", None)
+                "1": ("At time of event", "-PT0M"),
+                "2": ("5 minutes", "-PT5M"),
+                "3": ("10 minutes", "-PT10M"),
+                "4": ("15 minutes", "-PT15M"),
+                "5": ("30 minutes", "-PT30M"),
+                "6": ("1 hour", "-PT1H"),
+                "7": ("2 hours", "-PT2H"),
+                "8": ("12 hours", "-PT12H"),
+                "9": ("1 day", "-P1D"),
+                "10": ("2 days", "-P2D"),
+                "11": ("1 week", "-P1W"),
+                "12": ("No reminder", None)
             }
-            
+
             selected_reminder = reminder_options[choice]
             add_alarm = selected_reminder[1] is not None
             alarm_trigger = selected_reminder[1] if add_alarm else None
-            
+
             print(f"Selected: {selected_reminder[0]}")
             break
         else:
-            print("Please enter a number from 1 to 7.")
+            print("Please enter a number from 1 to 12.")
 
     return {
         'summary': summary,
